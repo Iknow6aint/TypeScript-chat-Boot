@@ -1,21 +1,9 @@
 import Image from "next/image";
-import { useCallback, useState } from "react";
 import AuthForm from "./components/AuthForm";
 
-
-type Variant = 'LOGIN' | 'REGISTER';
 const Auth = () => {
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [variant, setVariant] = useState<Variant>('LOGIN');
 
-    const toggleVariant = useCallback(() => {
-        if (variant === 'LOGIN') {
-            setVariant('REGISTER');
-        } else {
-            setVariant('LOGIN');
-        }
-    }, [variant]);
     return (
         <div
             className="
