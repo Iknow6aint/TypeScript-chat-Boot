@@ -94,17 +94,18 @@ const AuthForm = () => {
     const socialAction = (action: string) => {
         setIsLoading(true);
 
-        // signIn(action, { redirect: false })
-        //     .then((callback) => {
-        //         if (callback?.error) {
-        //             toast.error('Invalid credentials!');
-        //         }
+        signIn(action, { redirect: false })
+            .then((callback) => {
+                if (callback?.error) {
+                    toast.error('Invalid credentials!');
+                }
 
-        //         if (callback?.ok) {
-        //             router.push('/conversations')
-        //         }
-        //     })
-        //     .finally(() => setIsLoading(false));
+                if (callback?.ok) {
+                    toast.success('logged in')
+                    // router.push('/conversations')
+                }
+            })
+            .finally(() => setIsLoading(false));
     }
 
     return (
