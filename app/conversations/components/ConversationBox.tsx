@@ -9,8 +9,17 @@ import Avatar from "@/app/components/Avatar";
 import useOtherUser from "@/app/hooks/useOtherUser";
 import AvatarGroup from "@/app/components/AvatarGroup";
 import { FullConversationType } from "@/app/types";
+import clsx from "clsx";
 
-const ConversationBox = () => {
+interface ConversationBoxProps {
+    data: FullConversationType,
+    selected?: boolean;
+}
+
+const ConversationBox: React.FC<ConversationBoxProps> = ({
+    data,
+    selected
+}) => {
     return (
         <div>ConverstionBox</div>
     )
