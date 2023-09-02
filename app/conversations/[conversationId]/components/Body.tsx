@@ -19,6 +19,9 @@ const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
     const [messages, setMessages] = useState(initialMessages);
 
     const { conversationId } = useConversation();
+    useEffect(() => {
+        axios.post(`/api/converstion/${conversationId}/seen`)
+    })
     return (
         <div className="flex-1 overflow-y-auto">
             {messages.map((message, i) => (
