@@ -20,7 +20,7 @@ const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
 
     const { conversationId } = useConversation();
     useEffect(() => {
-        axios.post(`/api/converstion/${conversationId}/seen`)
+        axios.post(`/api/conversations/${conversationId}/seen`);
     })
     return (
         <div className="flex-1 overflow-y-auto">
