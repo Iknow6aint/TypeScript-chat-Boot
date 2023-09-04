@@ -29,6 +29,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     const [confirmOpen, setConfirmOpen] = useState(false);
 
     const otherUser = useOtherUser(data);
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), "PP")
@@ -52,10 +53,13 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     return (
         <>
             <Modal
-                isOpen
-                onClose={() => { }}
-                // eslint-disable-next-line react/no-children-prop
-                children={undefined} />
+                isOpen={confirmOpen}
+                onClose={() => setConfirmOpen(false)}
+            >
+                <div className='bg-white p-5'>
+                    <p>Hello modal</p>
+                </div>
+            </Modal>
             <Transition.Root show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-50" onClose={onClose}>
                     <Transition.Child
