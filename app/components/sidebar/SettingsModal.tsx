@@ -39,7 +39,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
         }
     } = useForm<FieldValues>({
         defaultValues: {
-            name: currentUser?.name,
+            name: currentUser.name,
             image: currentUser?.image
         }
     });
