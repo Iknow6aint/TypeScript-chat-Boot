@@ -5,7 +5,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { IoClose, IoTrash } from 'react-icons/io5'
 import { Conversation, User } from '@prisma/client';
 import { format } from 'date-fns';
-//import useActiveList from '@/app/hooks/useActiveList';
+import useActiveList from '@/app/hooks/useActiveList';
 
 import useOtherUser from '@/app/hooks/useOtherUser';
 
@@ -40,8 +40,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
         return data.name || otherUser.name;
     }, [data.name, otherUser.name]);
 
-    // const { members } = useActiveList();
-    // const isActive = members.indexOf(otherUser?.email!) !== -1;
+    const { members } = useActiveList();
+    const isActive = members.indexOf(otherUser?.email!) !== -1;
 
     const statusText = useMemo(() => {
         if (data.isGroup) {
@@ -124,7 +124,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                     </div>
                                                     <div className="w-full pb-5 pt-5 sm:px-0 sm:pt-0">
                                                         <dl className="space-y-8 px-4 sm:space-y-6 sm:px-6">
-                                                            {!data.isGroup && (
+                                                            {data.isGroup && (
                                                                 <div>
                                                                     <dt
                                                                         className="
@@ -145,7 +145,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                                                         sm:col-span-2
                                                                         "
                                                                     >
-                                                                        {otherUser.email}
+                                                                        {data.users.map((user) => user.email).join(', ')}
                                                                     </dd>
                                                                 </div>
                                                             )}
