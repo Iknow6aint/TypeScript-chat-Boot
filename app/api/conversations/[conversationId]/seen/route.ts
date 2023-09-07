@@ -78,7 +78,7 @@ export async function POST(
 
         // Update last message seen
         await pusherServer.trigger(conversationId!, 'message:update', updatedMessage);
-        return NextResponse.json(updatedMessage)
+        return new NextResponse('Success');
     } catch (error) {
         console.log(error, 'ERROR_MESSAGES_SEEN')
         return new NextResponse('Error', { status: 500 });
