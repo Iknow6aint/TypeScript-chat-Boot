@@ -7,12 +7,10 @@ import { BsGithub, BsGoogle } from 'react-icons/bs';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from "next/navigation";
 
-
+import Input from "@/app/components/inputs/Input";
 import AuthSocialButton from './AuthSocialButton';
 import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
-import Input from "@/app/components/inputs/Input";
-
 
 type Variant = 'LOGIN' | 'REGISTER';
 
@@ -24,9 +22,7 @@ const AuthForm = () => {
 
     useEffect(() => {
         if (session?.status === 'authenticated') {
-            router.push('/users')
-            console.log('AUTH');
-
+            router.push('/conversations')
         }
     }, [session?.status, router]);
 
@@ -57,21 +53,22 @@ const AuthForm = () => {
 
         if (variant === 'REGISTER') {
             axios.post('/api/register', data)
-                //     .then(() => signIn('credentials', {
-                //         ...data,
-                //         redirect: false,
-                //     }))
-                //     .then((callback) => {
-                //         if (callback?.error) {
-                //             toast.error('Invalid credentials!');
-                //         }
+                .then(() => signIn('credentials', {
+                    ...data,
+                    redirect: false,
+                }))
+                .then((callback) => {
+                    if (callback?.error) {
+                        toast.error('Invalid credentials!');
+                    }
 
-                //         if (callback?.ok) {
-                //             router.push('/conversations')
-                //         }
-                //     })
+                    if (callback?.ok) {
+                        router.push('/conversations')
+                    }
+                })
                 .catch(() => toast.error('Something went wrong!'))
-                .finally(() => setIsLoading(false))
+                .finally(() => console.log('sucess')
+                )
         }
 
         if (variant === 'LOGIN') {
@@ -85,8 +82,7 @@ const AuthForm = () => {
                     }
 
                     if (callback?.ok) {
-                        toast.success('logged in')
-                        // router.push('/conversations')
+                        router.push('/conversations')
                     }
                 })
                 .finally(() => setIsLoading(false))
@@ -103,8 +99,7 @@ const AuthForm = () => {
                 }
 
                 if (callback?.ok) {
-                    toast.success('logged in')
-                    // router.push('/conversations')
+                    router.push('/conversations')
                 }
             })
             .finally(() => setIsLoading(false));
